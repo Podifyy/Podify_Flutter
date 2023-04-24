@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-
+import 'auth_service.dart';
 import 'login.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -13,10 +13,17 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   final _formKey = GlobalKey<FormState>();
+  final AuthService authService = AuthService();
   bool obscureText = true;
   String name = '';
   String email = '';
   String password = '';
+
+  void signUpUser() {
+    authService.signUpUser(
+        context: context, email: email, password: password, name: name);
+    print(email);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -169,6 +176,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 _formKey.currentState!.save();
+                                signUpUser();
                               }
                             },
                             child: Text(
