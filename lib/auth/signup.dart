@@ -39,15 +39,17 @@ class _SignupScreenState extends State<SignupScreen> {
                 height: MediaQuery.of(context).size.height * 0.15,
               ),
               Center(
-                child: Text(
-                  'Sign up for Podify',
-                  style: TextStyle(
-                    fontSize: 24.0,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
+                  child: Hero(
+                tag: 'logo',
+                child: Container(
+                  width: 200,
+                  height: 100,
+                  child: Image.asset(
+                    "assets/spotify_logo.png",
+                    fit: BoxFit.fitWidth,
                   ),
                 ),
-              ),
+              )),
               SizedBox(height: 20.0),
               Padding(
                 padding: EdgeInsets.symmetric(

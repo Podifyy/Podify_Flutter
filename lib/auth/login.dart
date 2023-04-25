@@ -33,13 +33,15 @@ class _LoginScreenState extends State<LoginScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-              child: Container(
-                width: 200,
-                height: 100,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('assets/spotify_logo.png'),
-                      fit: BoxFit.fitWidth),
+              child: Hero(
+                tag: 'logo',
+                child: Container(
+                  width: 400,
+                  height: 200,
+                  child: Image.asset(
+                    "assets/spotify_logo.png",
+                    fit: BoxFit.fitWidth,
+                  ),
                 ),
               ),
             ),
