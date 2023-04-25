@@ -2,17 +2,28 @@
 
 import 'package:flutter/material.dart';
 import 'package:podify/auth/signup.dart';
-import 'package:podify/screens/home.dart';
+import 'auth_service.dart';
+import 'login.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
+  static const String routeName = '/login-screen';
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final AuthService authService = AuthService();
   bool obscureText = true;
+  String email = '';
+  String password = '';
+
+  void signInUser() {
+    authService.signInUser(context: context, email: email, password: password);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,152 +43,155 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-            Divider(
-              height: .1,
-              thickness: .2,
-              color: Colors.black,
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.15,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: MediaQuery.of(context).size.width * 0.35,
-                  vertical: 10.0),
+            Form(
+              key: _formKey,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    "E-mail address or username",
-                    style: TextStyle(
-                        color: Colors.black, fontWeight: FontWeight.w500),
-                  ),
                   SizedBox(
-                    height: 10.0,
+                    height: MediaQuery.of(context).size.height * 0.15,
                   ),
-                  TextFormField(
-                    style: TextStyle(color: Colors.black, fontSize: 18.0),
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Text(
-                    "Password",
-                    style: TextStyle(
-                        color: Colors.black, fontWeight: FontWeight.w500),
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  TextFormField(
-                    style: TextStyle(color: Colors.black, fontSize: 18.0),
-                    obscureText: obscureText,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          obscureText ? Icons.visibility_off : Icons.visibility,
-                          color: Colors.grey,
+                  SizedBox(height: 20.0),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: MediaQuery.of(context).size.width * 0.35,
+                        vertical: 10.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "E-mail",
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.w500),
                         ),
-                        onPressed: () {
-                          setState(() {
-                            obscureText = !obscureText;
-                          });
-                        },
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter your password';
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Center(
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue[200],
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 30.0, vertical: 20.0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        TextFormField(
+                          style: TextStyle(color: Colors.black, fontSize: 18.0),
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                              borderRadius: BorderRadius.circular(10.0),
                             ),
                           ),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: ((context) => HomeScreen())));
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter your email';
+                            }
+                            return null;
                           },
-                          child: Text(
-                            "Log in",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold),
-                          ))),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Divider(
-                    height: .1,
-                    thickness: .2,
-                    color: Colors.black,
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Center(
-                    child: Text(
-                      "Don't have an account?",
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Center(
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.transparent,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 150.0, vertical: 20.0),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
+                          onSaved: (value) {
+                            email = value!;
+                          },
                         ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: ((context) => SignupScreen())));
-                        },
-                        child: Text("Sign up for Podify")),
-                  ),
+                        SizedBox(height: 20.0),
+                        Text(
+                          "Password",
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.w500),
+                        ),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        TextFormField(
+                          style: TextStyle(color: Colors.black, fontSize: 18.0),
+                          obscureText: obscureText,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                obscureText
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                color: Colors.grey,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  obscureText = !obscureText;
+                                });
+                              },
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter your password';
+                            }
+                            return null;
+                          },
+                          onSaved: (value) {
+                            password = value!;
+                          },
+                        ),
+                        SizedBox(height: 20.0),
+                        Center(
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.blue[200],
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 30.0, vertical: 20.0),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    _formKey.currentState!.save();
+                                    signInUser();
+                                  }
+                                },
+                                child: Text(
+                                  "Login",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold),
+                                ))),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        Divider(
+                          height: .1,
+                          thickness: .2,
+                          color: Colors.black,
+                        ),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "New User? ",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.pushNamedAndRemoveUntil(context,
+                                      SignupScreen.routeName, (route) => false);
+                                },
+                                child: Text("Sign Up"))
+                          ],
+                        )
+                      ],
+                    ),
+                  )
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

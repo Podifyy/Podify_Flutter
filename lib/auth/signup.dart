@@ -6,6 +6,7 @@ import 'login.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
+  static const String routeName = '/signup-screen';
 
   @override
   State<SignupScreen> createState() => _SignupScreenState();
@@ -22,7 +23,6 @@ class _SignupScreenState extends State<SignupScreen> {
   void signUpUser() {
     authService.signUpUser(
         context: context, email: email, password: password, name: name);
-    print(email);
   }
 
   @override
@@ -207,10 +207,8 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                         TextButton(
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: ((context) => LoginScreen())));
+                              Navigator.pushNamedAndRemoveUntil(context,
+                                  LoginScreen.routeName, (route) => false);
                             },
                             child: Text("Login"))
                       ],
