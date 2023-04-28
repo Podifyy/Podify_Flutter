@@ -6,7 +6,7 @@ import 'package:podify/constants/utils.dart';
 import 'package:podify/models/users.dart';
 import 'package:podify/providers/user_provider.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:podify/screens/home.dart';
+import 'package:podify/screens/navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -69,7 +69,7 @@ class AuthService {
             await pref.setString("x-auth-token", jsonDecode(res.body)['token']);
             // ignore: use_build_context_synchronously
             Navigator.pushNamedAndRemoveUntil(
-                context, HomeScreen.routeName, (route) => false);
+                context, NavBar.routeName, (route) => false);
           }));
     } catch (e) {
       showSnackBar(context, e.toString());
@@ -106,7 +106,7 @@ class AuthService {
             await pref.setString("x-auth-token", jsonDecode(res.body)['token']);
             showSnackBar(context, "Sign up done");
             Navigator.pushNamedAndRemoveUntil(
-                context, HomeScreen.routeName, (route) => false);
+                context, NavBar.routeName, (route) => false);
           }));
     } catch (e) {
       showSnackBar(context, e.toString());

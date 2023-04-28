@@ -1,5 +1,5 @@
 import 'package:podify/auth/signup.dart';
-import 'package:podify/screens/home.dart';
+import 'package:podify/screens/navbar.dart';
 import 'package:podify/auth/login.dart';
 import 'package:flutter/material.dart';
 
@@ -11,11 +11,11 @@ Route<dynamic> generateRoute(RouteSettings routerSettings) {
           builder: (_) {
             return const LoginScreen();
           });
-    case HomeScreen.routeName:
+    case NavBar.routeName:
       return MaterialPageRoute(
           settings: routerSettings,
           builder: (_) {
-            return const HomeScreen();
+            return const NavBar();
           });
     case SignupScreen.routeName:
       return MaterialPageRoute(

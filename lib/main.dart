@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:podify/auth/login.dart';
 import 'package:podify/route.dart';
-import 'package:podify/screens/home.dart';
+import 'package:podify/screens/navbar.dart';
 import 'package:provider/provider.dart';
 import 'package:podify/providers/user_provider.dart';
 import 'package:podify/auth/auth_service.dart';
@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
       ),
       home: Provider.of<UserProvider>(context).user.token.isNotEmpty
-          ? const HomeScreen()
+          ? const NavBar()
           : const LoginScreen(),
     );
   }
