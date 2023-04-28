@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:podify/screens/home.dart';
 
@@ -47,9 +46,6 @@ class _NavBarState extends State<NavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Responsive site"),
-      ),
       bottomNavigationBar: MediaQuery.of(context).size.width < 640
           ? BottomNavigationBar(
               currentIndex: _selectedIndex,
@@ -76,31 +72,36 @@ class _NavBarState extends State<NavBar> {
       body: Row(
         children: [
           if (MediaQuery.of(context).size.width >= 640)
-            NavigationRail(
-              onDestinationSelected: (int index) {
-                setState(() {
-                  _selectedIndex = index;
-                });
-              },
-              selectedIndex: _selectedIndex,
-              destinations: const [
-                NavigationRailDestination(
-                    icon: Icon(Icons.home), label: Text('Home')),
-                NavigationRailDestination(
-                    icon: Icon(Icons.feed), label: Text('Feed')),
-                NavigationRailDestination(
-                    icon: Icon(Icons.favorite), label: Text('Favorites')),
-                NavigationRailDestination(
-                    icon: Icon(Icons.settings), label: Text('Settings')),
-              ],
+            SizedBox(
+              width: 200,
+              child: NavigationRail(
+                onDestinationSelected: (int index) {
+                  setState(() {
+                    _selectedIndex = index;
+                  });
+                },
+                selectedIndex: _selectedIndex,
+                destinations: const [
+                  NavigationRailDestination(
+                    icon: Icon(Icons.home),
+                    label: Text('Home'),
+                  ),
+                  NavigationRailDestination(
+                      icon: Icon(Icons.feed), label: Text('Feed')),
+                  NavigationRailDestination(
+                      icon: Icon(Icons.favorite), label: Text('Favorites')),
+                  NavigationRailDestination(
+                      icon: Icon(Icons.settings), label: Text('Settings')),
+                ],
 
-              labelType: NavigationRailLabelType.all,
-              selectedLabelTextStyle: const TextStyle(
-                color: Colors.teal,
+                labelType: NavigationRailLabelType.all,
+                selectedLabelTextStyle: const TextStyle(
+                  color: Colors.teal,
+                ),
+
+                unselectedLabelTextStyle: const TextStyle(),
+                // Called when one tab is selected
               ),
-
-              unselectedLabelTextStyle: const TextStyle(),
-              // Called when one tab is selected
             ),
           Expanded(child: _screens[_selectedIndex])
         ],
