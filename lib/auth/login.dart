@@ -49,9 +49,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 : Expanded(
                     child: Center(
                       child: Image.asset(
-                        'assets/spotify_logo.png',
+                        'assets/1.jpeg',
                         height: height,
-                        fit: BoxFit.fitHeight,
+                        fit: BoxFit.fill,
                       ),
                     ),
                   ),
