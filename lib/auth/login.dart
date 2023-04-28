@@ -47,13 +47,11 @@ class _LoginScreenState extends State<LoginScreen> {
             ResponsiveWidget.isSmallScreen(context)
                 ? const SizedBox()
                 : Expanded(
-                    child: Container(
-                      child: Center(
-                        child: Image.asset(
-                          'assets/spotify_logo.png',
-                          height: height,
-                          fit: BoxFit.fitHeight,
-                        ),
+                    child: Center(
+                      child: Image.asset(
+                        'assets/spotify_logo.png',
+                        height: height,
+                        fit: BoxFit.fitHeight,
                       ),
                     ),
                   ),

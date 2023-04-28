@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 
 import 'package:podify/constants/error_handling.dart';
@@ -64,10 +66,8 @@ class AuthService {
           context: context,
           onSuccess: (() async {
             SharedPreferences pref = await SharedPreferences.getInstance();
-            // ignore: use_build_context_synchronously
             Provider.of<UserProvider>(context, listen: false).setUser(res.body);
             await pref.setString("x-auth-token", jsonDecode(res.body)['token']);
-            // ignore: use_build_context_synchronously
             Navigator.pushNamedAndRemoveUntil(
                 context, NavBar.routeName, (route) => false);
           }));

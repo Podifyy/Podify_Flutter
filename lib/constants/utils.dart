@@ -1,6 +1,5 @@
 // import 'package:amazon_clone/models/product.dart';
 import 'package:flutter/material.dart';
-import 'dart:io';
 // import 'package:file_picker/file_picker.dart';
 
 void showSnackBar(BuildContext context, String text) {

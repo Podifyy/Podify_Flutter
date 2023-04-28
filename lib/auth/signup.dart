@@ -48,13 +48,11 @@ class _SignupScreenState extends State<SignupScreen> {
             ResponsiveWidget.isSmallScreen(context)
                 ? const SizedBox()
                 : Expanded(
-                    child: Container(
-                      child: Center(
-                        child: Image.asset(
-                          'assets/spotify_logo.png',
-                          height: height,
-                          fit: BoxFit.fitHeight,
-                        ),
+                    child: Center(
+                      child: Image.asset(
+                        'assets/spotify_logo.png',
+                        height: height,
+                        fit: BoxFit.fitHeight,
                       ),
                     ),
                   ),
