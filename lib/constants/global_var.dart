@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-String uri = '167.71.229.9';
+String uri = 'localhost:3000';
 
 class GlobalVar {
   static const Color backColor = Color(0xffF6F6F6);
